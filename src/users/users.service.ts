@@ -8,10 +8,20 @@ import {CreateUserDto} from './dto/create-users.dto'
 @Injectable()
 export class UsersService {
 
-    constructor(@InjectRepository(Users) private userRepository: Repository<Users>){}
+    constructor(@InjectRepository(Users) private usersRepository: Repository<Users>){}
 
     createUser(user: CreateUserDto){
-        const newUser = this.userRepository.create(user)
-        return this.userRepository.save(newUser)
+        const newUser = this.usersRepository.create(user)
+        return this.usersRepository.save(newUser)
+    }
+    getUsers(){
+        return this.usersRepository.find()
+    }
+    getUser(id: number){
+        return this.usersRepository.findOne({
+            where:{
+                id
+            }    
+        })
     }
 }

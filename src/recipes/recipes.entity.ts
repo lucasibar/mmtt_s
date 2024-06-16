@@ -1,7 +1,7 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm'
 
 @Entity()
-export class Users{
+export class Recipes{
     
     @PrimaryGeneratedColumn()
     id: number
@@ -10,16 +10,14 @@ export class Users{
     name: string
     
     @Column()
-    password: string
-    
-    @Column({unique: true})
-    mail: string
+    portion: string
     
     @Column({default: "user"}) //user, administrator, nutricionist
     category: string
     
-    @Column({nullable: true})
-    targetKcals: number
+    // @Column({nullable: true})
+    // userId: number
 
 
 }
+
