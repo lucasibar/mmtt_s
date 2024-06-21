@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm'
+import { Recipes } from 'src/recipes/recipes.entity'
+import {Column, Entity, ManyToMany, PrimaryGeneratedColumn} from 'typeorm'
 
 @Entity()
 export class Users{
@@ -21,5 +22,7 @@ export class Users{
     @Column({nullable: true})
     targetKcals: number
 
+    @ManyToMany(()=> Recipes, recipe => recipe.users)
+    recipes: Recipes[]
 
 }

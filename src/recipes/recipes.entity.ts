@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm'
+import { Users } from 'src/users/users.entity'
+import {Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm'
 
 @Entity()
 export class Recipes{
@@ -15,8 +16,17 @@ export class Recipes{
     @Column({default: "user"}) //user, administrator, nutricionist
     category: string
     
-    // @Column({nullable: true})
-    // userId: number
+    @ManyToMany(()=> Users, users=>users.recipes)
+    @JoinTable({
+        name:'Days',
+        joinColumn: {
+            name:'userId'
+        },
+        inverseJoinColumn: {
+            name:'recipeId'
+        }
+    })
+    users: Users[]
 
 
 }
