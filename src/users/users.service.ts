@@ -2,11 +2,8 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {Users} from './users.entity'
-import { UpsertType } from 'typeorm/driver/types/UpsertType';
 import {CreateUserDto} from './dto/create-users.dto'
 import { CreateRecipeDto } from 'src/recipes/dto/create-recipes.dto';
-import { CreateFamilyMembersDto } from 'src/users/dto/create-family.dto';
-import { FamilyMembers} from 'src/users/familyMembers/familyMembers.entity';
 
 @Injectable()
 export class UsersService {
@@ -55,6 +52,5 @@ export class UsersService {
         return "s"
     }
 
-    // createFamily(id:number, famili: CreateFamilyDto)
-
+    
 }
