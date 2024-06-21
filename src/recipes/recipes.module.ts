@@ -4,10 +4,11 @@ import { RecipesService } from './recipes.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Recipes } from './recipes.entity';
 import { Users } from 'src/users/users.entity';
+import { DayMeals } from 'src/daymeals/daymeals.entity';
 
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Recipes, Users])],
+  imports:[TypeOrmModule.forFeature([Recipes, Users, DayMeals])],
   controllers: [RecipesController],
   providers: [RecipesService]
 })

@@ -15,16 +15,11 @@ export class RecipesService {
     ) {}
 
     async createRecipe(recipe: CreateRecipeDto, userId: number) {
-
-        const newRecipe = this.recipesRepository.create(recipe);
-        const user = await this.userRepository.findOne({ where: { id: userId }});
         
-        // Asociar receta al usuario
-        if (user) {
-            newRecipe.users.push(user);
-            user.recipes.push(newRecipe);
-            await this.userRepository.save(user);
-        }
+        const newRecipe = this.recipesRepository.create(recipe);
+        const day = await this.userRepository.findOne({ where: { id: userId }});
+        
+       
 
         // Guardar nueva receta
         return this.recipesRepository.save(newRecipe);
