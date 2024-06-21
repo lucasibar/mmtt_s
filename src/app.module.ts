@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import {TypeOrmModule} from '@nestjs/typeorm'
 import { RecipesModule } from './recipes/recipes.module';
 import { IngredientsModule } from './ingredients/ingredients.module';
+import { FamilyMembersModule } from './users/familyMembers/familyMembers.module';
 
 
 
@@ -20,7 +21,7 @@ import { IngredientsModule } from './ingredients/ingredients.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true
     }), 
-    UsersModule, RecipesModule, IngredientsModule],
+    UsersModule, RecipesModule, IngredientsModule, FamilyMembersModule],
   controllers: [AppController],
   providers: [AppService],
 })
