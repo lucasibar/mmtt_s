@@ -18,9 +18,12 @@ export class RecipesController {
         return this.recipesService.getRecipe(id)
     }
 
-    @Post()
-    createRecipe(@Body() newRecipe:CreateRecipeDto):Promise<Recipes >{
-        return this.recipesService.createRecipe(newRecipe)
+    @Post(':userId')
+    createRecipe(
+        @Param('userId', ParseIntPipe) userId : number,
+        @Body() newRecipe:CreateRecipeDto
+    ):Promise<Recipes >{
+        return this.recipesService.createRecipe(newRecipe, userId)
     }
 }
 

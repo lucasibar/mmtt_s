@@ -16,7 +16,7 @@ export class Recipes{
     @Column({default: "user"}) //user, administrator, nutricionist
     category: string
     
-    @ManyToMany(()=> Users, users=>users.recipes)
+    @ManyToMany(()=> Users, users => users.recipes)
     @JoinTable({
         name:'Days',
         joinColumn: {
