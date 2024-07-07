@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Recipes } from './recipes.entity';
@@ -13,27 +13,37 @@ export class RecipesService {
         @InjectRepository(Users)
         private userRepository: Repository<Users>,
     ) {}
-
     async createRecipe(recipe: CreateRecipeDto, userId: number) {
+        const user= await this.userRepository.findOne({where:{id:userId}})
         
         const newRecipe = this.recipesRepository.create(recipe);
-        const day = await this.userRepository.findOne({ where: { id: userId }});
-        
-       
+        newRecipe.user = user
 
-        // Guardar nueva receta
-        return this.recipesRepository.save(newRecipe);
+        return await this.recipesRepository.save(newRecipe);
     }
 
-    getRecipes() {
-        return this.recipesRepository.find();
+
+
+
+    async getRecipes(userId: number):Promise<Recipes[]> {
+        const recipesLoad= await this.recipesRepository.find({
+            where:{
+                user:{ id: userId}
+            },
+        });
+        return recipesLoad
     }
 
-    getRecipe(id: number) {
+
+
+
+
+    getRecipe(userId: number) {
         return this.recipesRepository.findOne({
             where: {
-                id
-            }
+                user: {id: userId}
+            },
+            relations: ['user']
         });
     }
 }

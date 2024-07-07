@@ -1,6 +1,5 @@
 export class CreateRecipeDto{    
-    name: string
-    portion: string
+    recipeName: string
     category: string
-    //userId: number
+    totalPortions: number
 }

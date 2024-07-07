@@ -8,9 +8,11 @@ export class RecipesController {
     constructor(private recipesService: RecipesService){}
 
 
-    @Get()
-    getRecipes():Promise<Recipes[]>{
-        return this.recipesService.getRecipes()
+    @Get('user/:userId')
+    getRecipes(
+        @Param('userId', ParseIntPipe) userId : number,
+    ):Promise<Recipes[]>{
+        return this.recipesService.getRecipes(userId)
     }
 
     @Get(':id')
@@ -18,11 +20,12 @@ export class RecipesController {
         return this.recipesService.getRecipe(id)
     }
 
+
     @Post(':userId')
     createRecipe(
         @Param('userId', ParseIntPipe) userId : number,
         @Body() newRecipe:CreateRecipeDto
-    ):Promise<Recipes >{
+    ):Promise<Recipes>{
         return this.recipesService.createRecipe(newRecipe, userId)
     }
 }

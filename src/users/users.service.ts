@@ -13,12 +13,12 @@ export class UsersService {
     async createUser(user: CreateUserDto){
         const exists= await this.usersRepository.findOne({
             where:{
-                id: user.id
+                mail: user.mail
             }    
         })
 
         if(exists){
-            return new HttpException('Este usuario ya existe', 400)
+            return new HttpException('Este mail ya esta registrado', 400)
         }
 
 
@@ -27,13 +27,14 @@ export class UsersService {
         return this.usersRepository.save(newUser)
     }
     getUsers(){
-        return this.usersRepository.find()
+        return this.usersRepository.find({ relations: ['daymeals'] })
     }
     getUser(id: number){
         return this.usersRepository.findOne({
             where:{
                 id
-            }    
+            },
+            relations: ['daymeals', 'recipes']
         })
     }
     deleteUser(id: number){

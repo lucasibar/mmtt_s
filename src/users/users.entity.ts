@@ -23,8 +23,12 @@ export class Users{
     @Column({nullable: true})
     targetKcals: number
 
-    // @ManyToMany(()=> Recipes, recipe => recipe.users)
-    // recipes: Recipes[]
+
+
     @OneToMany(() => DayMeals, daymeal => daymeal.user)
-    daymeal: DayMeals[];
+    daymeals: DayMeals[];
+
+    @OneToMany(() => Recipes, recipe => recipe.user)
+    recipes: Recipes[]
+
 }
